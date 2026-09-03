@@ -9,8 +9,8 @@ function validateStudent(student) {
     errors.push("Группа: одна буква и 4 цифры, например P3211");
   }
 
-  if (!/^[345][0-9][1-5][0-9]{3}$/.test(student.isuId)) {
-    errors.push("ИСУ ID: 6 цифр, начинается с 3, 4 или 5; третья цифра от 1 до 5");
+  if (!/^[0-9][0-9][1-5][0-9]{3}$/.test(student.isuId)) {
+    errors.push("ИСУ ID: 6 цифр, третья цифра от 1 до 5");
   }
 
   if (!Number.isInteger(Number(student.dormNumber)) || Number(student.dormNumber) < 1) {

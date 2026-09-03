@@ -1,5 +1,6 @@
 <section id="student-form-view">
   <h2 id="form-title">Добавить студента</h2>
+  <div id="student-preview"></div>
 
   <form id="student-form">
     <input type="hidden" id="student-id">
@@ -16,7 +17,7 @@
 
     <p>
       <label for="isuId">ИСУ ID *</label><br>
-      <input type="text" id="isuId" required pattern="[345][0-9][1-5][0-9]{3}" inputmode="numeric" maxlength="6" title="6 цифр: первая 3, 4 или 5; третья от 1 до 5">
+      <input type="text" id="isuId" required pattern="[0-9][0-9][1-5][0-9]{3}" inputmode="numeric" maxlength="6" title="6 цифр, третья цифра от 1 до 5">
     </p>
 
     <p>
