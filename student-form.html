@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление студента</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/cat-favicon.ico" type="image/x-icon">
+
+</head>
+
+<body>
+    <main class="main">
+        <h2>Добавление студента</h2>
+        <form class="student-form">
+            <div class="form-field">
+                <label for="full-name">ФИО студента</label>
+                <input
+                    type="text"
+                    id="full-name"
+                    name="full-name"
+                    required
+                >
+            </div>
+            <div class="form-field">
+                <label for="group">Группа</label>
+                <input
+                    type="text"
+                    id="group"
+                    name="group"
+                    required
+                >
+            </div>
+            <div class="form-field">
+                <label for="isu-id">ИСУ ID</label>
+                <input
+                    type="number"
+                    id="isu-id"
+                    name="isu-id"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <div class="form-field">
+                <label for="dormitory">Номер общежития</label>
+                <input
+                    type="number"
+                    id="dormitory"
+                    name="dormitory"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <div class="form-field">
+                <label for="room">Комната</label>
+                <input
+                    type="number"
+                    id="room"
+                    name="room"
+                    min="1"
+                    required
+                >
+
+            </div>
+
+            <div class="form-field">
+                <label for="settlement-date">Срок заселения</label>
+                <input
+                    type="date"
+                    id="settlement-date"
+                    name="settlement-date"
+                    required
+                >
+            </div>
+
+            <div class="form-field">
+                <label for="foreign-student">Иностранный студент</label>
+                <input
+                    type="checkbox"
+                    id="foreign-student"
+                    name="foreign-student"
+                >
+            </div>
+
+            <div class="form-field">
+                <label for="notes">Заметки</label>
+                <textarea
+                    id="notes"
+                    name="notes"
+                    rows="5"
+                ></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="button">Сохранить</button>
+                <a href="index.html" class="button">Назад</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
