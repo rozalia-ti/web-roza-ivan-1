@@ -1,66 +1,118 @@
-const DB_NAME = "StudentDB";
-const STORE_NAME = "students";
-
 let db;
 
 function openDB() {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DB_NAME, 1);
+    return new Promise(function (resolve, reject) {
+        const request = indexedDB.open("studentsDB", 1);
 
-    request.onupgradeneeded = function (event) {
-      const database = event.target.result;
+        request.onupgradeneeded = function (event) {
+            db = event.target.result;
 
-      if (!database.objectStoreNames.contains(STORE_NAME)) {
-        database.createObjectStore(STORE_NAME, {
-          keyPath: "id",
-          autoIncrement: true,
-        });
-      }
-    };
+            if (!db.objectStoreNames.contains("students")) {
+                db.createObjectStore("students", {
+                    keyPath: "id",
+                    autoIncrement: true
+                });
+            }
+        };
 
-    request.onsuccess = function (event) {
-      db = event.target.result;
-      resolve();
-    };
+        request.onsuccess = function (event) {
+            db = event.target.result;
 
-    request.onerror = function () {
-      reject("Не удалось открыть базу данных");
-    };
-  });
-}
+            console.log("БД успешно открыта");
+            resolve();
+        };
 
-function makeRequest(mode, action) {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction(STORE_NAME, mode);
-    const store = transaction.objectStore(STORE_NAME);
-    const request = action(store);
-
-    request.onsuccess = function () {
-      resolve(request.result);
-    };
-
-    request.onerror = function () {
-      reject("Ошибка работы с базой данных");
-    };
-  });
-}
-
-function getAllStudents() {
-  return makeRequest("readonly", (store) => store.getAll());
-}
-
-function getStudentById(id) {
-  return makeRequest("readonly", (store) => store.get(id));
+        request.onerror = function () {
+            console.error("Ошибка при открытии БД");
+            reject("Не удалось открыть базу данных");
+        };
+    });
 }
 
 function addStudent(student) {
-  return makeRequest("readwrite", (store) => store.add(student));
+    return new Promise(function (resolve, reject) {
+        const transaction = db.transaction("students", "readwrite");
+        const store = transaction.objectStore("students");
+        const request = store.add(student);
+
+        request.onsuccess = function () {
+            console.log("Студент добавлен");
+            resolve(request.result);
+        };
+
+        request.onerror = function () {
+            console.error("Ошибка при добавлении студента");
+            reject("Ошибка при добавлении студента");
+        };
+    });
+}
+
+function getAllStudents() {
+    return new Promise(function (resolve, reject) {
+        const transaction = db.transaction("students", "readonly");
+        const store = transaction.objectStore("students");
+        const request = store.getAll();
+
+        request.onsuccess = function () {
+            resolve(request.result);
+        };
+
+        request.onerror = function () {
+            console.error("Ошибка при получении студентов");
+            reject("Ошибка при получении студентов");
+        };
+    });
+}
+
+function getStudentById(id) {
+    return new Promise(function (resolve, reject) {
+        const transaction = db.transaction("students", "readonly");
+        const store = transaction.objectStore("students");
+        const request = store.get(id);
+
+        request.onsuccess = function () {
+            resolve(request.result);
+        };
+
+        request.onerror = function () {
+            console.error("Ошибка при получении студента");
+            reject("Ошибка при получении студента");
+        };
+    });
 }
 
 function updateStudent(student) {
-  return makeRequest("readwrite", (store) => store.put(student));
+    return new Promise(function (resolve, reject) {
+        const transaction = db.transaction("students", "readwrite");
+        const store = transaction.objectStore("students");
+        const request = store.put(student);
+
+        request.onsuccess = function () {
+            console.log("Студент обновлен");
+            resolve(request.result);
+        };
+
+        request.onerror = function () {
+            console.error("Ошибка при обновлении студента");
+            reject("Ошибка при обновлении студента");
+        };
+    });
 }
 
 function deleteStudent(id) {
-  return makeRequest("readwrite", (store) => store.delete(id));
+    return new Promise(function (resolve, reject) {
+        const transaction = db.transaction("students", "readwrite");
+        const store = transaction.objectStore("students");
+        const request = store.delete(id);
+
+        request.onsuccess = function () {
+            console.log("Студент удалён");
+            resolve();
+        };
+
+        request.onerror = function () {
+            console.error("Ошибка при удалении студента");
+            reject("Ошибка при удалении студента");
+        };
+    });
 }
