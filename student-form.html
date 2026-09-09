@@ -7,14 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добавление студента</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="assets/cat-favicon.ico" type="image/x-icon">
-
+    <link rel="icon" href="assets/cat-favicon.png" type="image/x-icon">
 </head>
 
 <body>
     <main class="main">
         <h2>Добавление студента</h2>
-        <form class="student-form">
+        <form class="student-form" id="student-form">
             <div class="form-field">
                 <label for="full-name">ФИО студента</label>
                 <input
@@ -99,6 +98,8 @@
                 <a href="index.html" class="button">Назад</a>
             </div>
         </form>
+        <script src="js/db.js"></script>
+        <script src="js/student-form.js"></script>
     </main>
 </body>
 </html>
